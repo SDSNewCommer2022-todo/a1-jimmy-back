@@ -28,7 +28,7 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	// 2. Liquibase
-	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.15.0'
+//	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.15.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
