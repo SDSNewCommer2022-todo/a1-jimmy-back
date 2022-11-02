@@ -32,8 +32,11 @@ public class TodoService {
     public void deleteTask(long id){
         taskRepo.deleteById(id);
     }
-
+    public void deleteAllTaskByName(String name){
+        taskRepo.deleteTaskEntitiesByOwner(name);
+    }
     public List<TaskEntity> findAllTasksByName(String name){
-        return taskRepo.findTaskEntitiesByOwner(name);
+        return taskRepo.findTaskEntitiesByOwner(name
+        );
     }
 }

@@ -46,4 +46,10 @@ public class TodoController {
     public void deleteTask(@PathVariable long id){
         todoService.deleteTask(id);
     }
+
+    @DeleteMapping("/all/{name}")
+    public void deleteAllTask(@PathVariable String name){
+        todoService.deleteAllTaskByName(name);
+
+    }
 }
