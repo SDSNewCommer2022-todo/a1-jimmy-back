@@ -23,7 +23,6 @@ public class TaskEntity {
     @Column(length = 20)
     private String status;
 
-
     @Column
     @CreationTimestamp
     private java.sql.Timestamp created_time;
@@ -31,4 +30,14 @@ public class TaskEntity {
     @Column
     @UpdateTimestamp
     private java.sql.Timestamp modified_date;
+
+    public TaskEntity(String owner, String content){
+        this.owner = owner;
+        this.content = content;
+        this.status = "REGISTERED";
+    }
+
+    public TaskEntity() {
+
+    }
 }
