@@ -15,21 +15,20 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @PostMapping("/save")
+    @PostMapping("/")
     public void newTask(@RequestBody Map<String, Object> requestData){
         String owner = requestData.get("owner").toString();
         String content = requestData.get("content").toString();
         todoService.addTask(owner, content);
     }
 
-    @PostMapping("/get-all-task")
-    public List getAllTask(@RequestBody Map<String, Object> requestData){
-        String name = (String) requestData.get("name");
+    @GetMapping("/{name}")
+    public List getAllTask(@PathVariable String name){
         List<TaskEntity> tasks = todoService.findAllTasksByName(name);
         return tasks;
     }
 
-    @PostMapping("/status")
+    @PatchMapping("/status")
     public void updateStatus(@  RequestBody Map<String, Object> requestData){
         int id = (int) requestData.get("id");
         String status = (String) requestData.get("status");
