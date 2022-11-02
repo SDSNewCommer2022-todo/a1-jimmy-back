@@ -28,4 +28,11 @@ public class TodoController {
         List<TaskEntity> tasks = todoService.findAllTasksByName(name);
         return tasks;
     }
+
+    @PostMapping("/status")
+    public void updateStatus(@  RequestBody Map<String, Object> requestData){
+        int id = (int) requestData.get("id");
+        String status = (String) requestData.get("status");
+        todoService.updateTaskStatus(id, status);
+    }
 }
