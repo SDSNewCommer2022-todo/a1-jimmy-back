@@ -5,8 +5,8 @@ import com.sds.todo.domain.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -17,10 +17,11 @@ public class TodoService {
         TaskEntity task = new TaskEntity(owner, content);
         taskRepo.save(task);
     }
-    public List<TaskEntity> findAllTasks(){
-        List<TaskEntity> ret = new ArrayList<>();
-        taskRepo.findAll().forEach(e->ret.add(e));
-        return ret;
+
+    public void updateTaskStatus(long id, String status){
+        TaskEntity task = taskRepo.findById(id).get();
+        task.setStatus(status);
+        taskRepo.save(task);
     }
 
     public List<TaskEntity> findAllTasksByName(String name){

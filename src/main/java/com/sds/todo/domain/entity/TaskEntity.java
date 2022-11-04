@@ -1,12 +1,14 @@
 package com.sds.todo.domain.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "task")
 public class TaskEntity {
@@ -40,4 +42,5 @@ public class TaskEntity {
     public TaskEntity() {
 
     }
+
 }
