@@ -29,9 +29,21 @@ public class TodoController {
     }
 
     @PatchMapping("/status")
-    public void updateStatus(@  RequestBody Map<String, Object> requestData){
+    public void updateStatus(@RequestBody Map<String, Object> requestData){
         int id = (int) requestData.get("id");
         String status = (String) requestData.get("status");
         todoService.updateTaskStatus(id, status);
+    }
+
+    @PatchMapping("/content")
+    public void updateContent(@RequestBody Map<String, Object> requestData){
+        int id = (int) requestData.get("id");
+        String content = (String) requestData.get("content");
+        todoService.updateTaskContent(id, content);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable long id){
+        todoService.deleteTask(id);
     }
 }

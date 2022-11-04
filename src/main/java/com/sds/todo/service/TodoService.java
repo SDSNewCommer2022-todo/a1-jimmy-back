@@ -23,6 +23,15 @@ public class TodoService {
         task.setStatus(status);
         taskRepo.save(task);
     }
+    public void updateTaskContent(long id, String content){
+        TaskEntity task = taskRepo.findById(id).get();
+        task.setContent(content);
+        taskRepo.save(task);
+    }
+
+    public void deleteTask(long id){
+        taskRepo.deleteById(id);
+    }
 
     public List<TaskEntity> findAllTasksByName(String name){
         return taskRepo.findTaskEntitiesByOwner(name);
