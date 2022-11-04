@@ -13,8 +13,4 @@ import java.util.List;
 @Repository
 public interface    TaskRepository extends JpaRepository<TaskEntity, Long> {
     List<TaskEntity> findTaskEntitiesByOwner(String Owner);
-
-    @Modifying
-    @Query("UPDATE TaskEntity t SET t.status = :status WHERE t.owner = :owner")
-    void updateAllStatusByOwner(@Param("owner") String owner, @Param("status") String status);
 }

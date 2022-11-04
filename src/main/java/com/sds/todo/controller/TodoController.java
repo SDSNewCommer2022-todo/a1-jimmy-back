@@ -1,13 +1,15 @@
 package com.sds.todo.controller;
 
 import com.sds.todo.domain.entity.TaskEntity;
+import com.sds.todo.dto.TodoAddTaskDto;
+import com.sds.todo.dto.TodoUpdateAllStatusDto;
+import com.sds.todo.dto.TodoUpdateContentDto;
+import com.sds.todo.dto.TodoUpdateStatusDto;
 import com.sds.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
@@ -17,10 +19,8 @@ public class TodoController {
     private TodoService todoService;
 
     @PostMapping("/")
-    public void newTask(@RequestBody Map<String, Object> requestData){
-        String owner = requestData.get("owner").toString();
-        String content = requestData.get("content").toString();
-        todoService.addTask(owner, content);
+    public void newTask(@RequestBody TodoAddTaskDto todoAddTaskDto){
+        todoService.addTask(todoAddTaskDto.getOwner(), todoAddTaskDto.getContent());
     }
 
     @GetMapping("/{name}")
@@ -30,24 +30,18 @@ public class TodoController {
     }
 
     @PatchMapping("/status")
-    public void updateStatus(@RequestBody Map<String, Object> requestData){
-        int id = (int) requestData.get("id");
-        String status = (String) requestData.get("status");
-        todoService.updateTaskStatus(id, status);
+    public void updateStatus(@RequestBody TodoUpdateStatusDto todoUpdateStatusDto){
+        todoService.updateTaskStatus(todoUpdateStatusDto.getId(), todoUpdateStatusDto.getStatus());
     }
 
     @PatchMapping("/status/all")
-    public void updateAllStatus(@RequestBody Map<String, Object> requestData){
-        String owner = (String) requestData.get("owner");
-        String status = (String) requestData.get("status");
-        todoService.updateAllTaskStatus(owner, status);
+    public void updateAllStatus(@RequestBody TodoUpdateAllStatusDto todoUpdateAllStatusDto){
+        todoService.updateAllTaskStatus(todoUpdateAllStatusDto.getOwner(), todoUpdateAllStatusDto.getStatus());
     }
 
     @PatchMapping("/content")
-    public void updateContent(@RequestBody Map<String, Object> requestData){
-        int id = (int) requestData.get("id");
-        String content = (String) requestData.get("content");
-        todoService.updateTaskContent(id, content);
+    public void updateContent(@RequestBody TodoUpdateContentDto todoUpdateContentDto){
+        todoService.updateTaskContent(todoUpdateContentDto.getId(), todoUpdateContentDto.getContent());
     }
 
 }
