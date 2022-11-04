@@ -5,6 +5,7 @@ import com.sds.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,13 @@ public class TodoController {
         todoService.updateTaskStatus(id, status);
     }
 
+    @PatchMapping("/status/all")
+    public void updateAllStatus(@RequestBody Map<String, Object> requestData){
+        String owner = (String) requestData.get("owner");
+        String status = (String) requestData.get("status");
+        todoService.updateAllTaskStatus(owner, status);
+    }
+
     @PatchMapping("/content")
     public void updateContent(@RequestBody Map<String, Object> requestData){
         int id = (int) requestData.get("id");
@@ -42,14 +50,4 @@ public class TodoController {
         todoService.updateTaskContent(id, content);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable long id){
-        todoService.deleteTask(id);
-    }
-
-    @DeleteMapping("/all/{name}")
-    public void deleteAllTask(@PathVariable String name){
-        todoService.deleteAllTaskByName(name);
-
-    }
 }

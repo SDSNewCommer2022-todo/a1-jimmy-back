@@ -2,6 +2,9 @@ package com.sds.todo.domain.repository;
 
 import com.sds.todo.domain.entity.TaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -11,6 +14,7 @@ import java.util.List;
 public interface    TaskRepository extends JpaRepository<TaskEntity, Long> {
     List<TaskEntity> findTaskEntitiesByOwner(String Owner);
 
-    @Transactional
-    void deleteTaskEntitiesByOwner(String Owner);
+    @Modifying
+    @Query("UPDATE TaskEntity t SET t.status = :status WHERE t.owner = :owner")
+    void updateAllStatusByOwner(@Param("owner") String owner, @Param("status") String status);
 }
