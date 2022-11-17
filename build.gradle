@@ -29,7 +29,7 @@ dependencies {
 
 	// 2. Liquibase
 //	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.15.0'
-
+	testImplementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
